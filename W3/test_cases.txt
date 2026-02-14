@@ -1,0 +1,49 @@
+Personal Account Management – Test Cases
+
+--------------------------------------------------
+Test Case 1: Deposit Valid Amount
+Action: Deposit 500
+Expected Result:
+- Transaction created with type "DEPOSIT"
+- Balance becomes 500
+
+--------------------------------------------------
+Test Case 2: Withdraw Valid Amount
+Action: Withdraw 200
+Expected Result:
+- Transaction created with type "WITHDRAWAL"
+- Balance becomes 300
+
+--------------------------------------------------
+Test Case 3: Withdraw More Than Balance
+Action: Withdraw 1000 (when balance is 300)
+Expected Result:
+- Message: "Error"
+- Balance remains unchanged (300)
+
+--------------------------------------------------
+Test Case 4: Deposit Negative Amount
+Action: Deposit -50
+Expected Result:
+- Message: "Deposit amount should be positive"
+- Balance remains unchanged
+
+--------------------------------------------------
+Test Case 5: Withdraw Negative Amount
+Action: Withdraw -20
+Expected Result:
+- Message: "Withdrawal amount should be positive"
+- Balance remains unchanged
+
+--------------------------------------------------
+Test Case 6: Print Transaction History
+Action: Call print_transaction_history()
+Expected Result:
+- All previous transactions displayed
+- Each transaction shows timestamp, type, and amount
+
+--------------------------------------------------
+Test Case 7: Check Balance
+Action: Call get_balance()
+Expected Result:
+- Returns the correct current balance
