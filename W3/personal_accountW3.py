@@ -1,5 +1,9 @@
 from datetime import datetime
 
+
+# -------------------------
+# Amount Class
+# -------------------------
 class Amount:
     def __init__(self, amount, transaction_type):
         self.amount = float(amount)
@@ -10,13 +14,15 @@ class Amount:
         return f"{self.timestamp} | {self.transaction_type} | ${self.amount:.2f}"
 
 
+# -------------------------
+# PersonalAccount Class
+# -------------------------
 class PersonalAccount:
     def __init__(self, account_number, account_holder):
         self.account_number = account_number
         self.account_holder = account_holder
         self.balance = 0.0
         self.transactions = []
-
 
     def deposit(self, amount):
         if amount <= 0:
@@ -54,48 +60,55 @@ class PersonalAccount:
     def get_balance(self):
         return self.balance
 
-    def get_account_number(self):
-        return self.account_number
-
-    def set_account_number(self, account_number):
-        self.account_number = account_number
-
-    def get_account_holder(self):
-        return self.account_holder
-
-    def set_account_holder(self, account_holder):
-        self.account_holder = account_holder
-
-    #string representation
     def __str__(self):
         return (f"Account Number: {self.account_number}\n"
                 f"Account Holder: {self.account_holder}\n"
                 f"Balance: ${self.balance:.2f}")
 
-    #operator overloading
-    def __add__(self, amount):
-        self.deposit(amount)
-        return self
 
-    def __sub__(self, amount):
-        self.withdraw(amount)
-        return self
-
-
-#sample test
+# -------------------------
+# Interactive Menu
+# -------------------------
 if __name__ == "__main__":
-    account = PersonalAccount(12345, "Islam Asylbekov")
 
-    account.deposit(500)
-    account.withdraw(150)
+    print("==== Personal Account System ====")
+    account_number = input("Enter account number: ")
+    account_holder = input("Enter account holder name: ")
 
-    print("\nCurrent Balance:", account.get_balance())
+    account = PersonalAccount(account_number, account_holder)
 
-    account.print_transaction_history()
+    while True:
+        print("\n1. Deposit")
+        print("2. Withdraw")
+        print("3. Show Balance")
+        print("4. Show Transaction History")
+        print("5. Exit")
 
-    # Using overloaded operators
-    account + 200
-    account - 100
+        choice = input("Choose option: ")
 
-    print("\nFinal Account Info:")
-    print(account)
+        if choice == "1":
+            try:
+                amount = float(input("Enter amount to deposit: "))
+                account.deposit(amount)
+            except:
+                print("Invalid amount.")
+
+        elif choice == "2":
+            try:
+                amount = float(input("Enter amount to withdraw: "))
+                account.withdraw(amount)
+            except:
+                print("Invalid amount.")
+
+        elif choice == "3":
+            print(f"Current Balance: ${account.get_balance():.2f}")
+
+        elif choice == "4":
+            account.print_transaction_history()
+
+        elif choice == "5":
+            print("Goodbye!")
+            break
+
+        else:
+            print("Invalid option.")
